@@ -1,0 +1,515 @@
+# Go Language (Go-Lang/Golang/Go)
+
+This repo documents my personal notes on learning Go language. I picked up the language by following tutorials from [Pak Eko]('https://www.youtube.com/watch?v=IO_vkyJnMas&list=PL-CtdCApEFH-0i9dzMzLw6FKVrFWv3QvQ'). Since the tutorial is in Indonesian, I've created this English notes for those who want to learn from his teachings but may not speak Indonesian.
+
+## History
+
+- Developed by Google using the C programming language.
+- Released to the public as open source in 2009.
+- Gained popularity, particularly after being utilized to build Docker in 2011.
+- Presently, numerous cutting-edge technologies are developed using Go, surpassing the usage C. Notable projects include Kubernetes, Promotheus, CockroachDB, etc.
+- Currently gaining popularity as the preffered language for constructing backend APIa in microservices.
+
+## Why Learn Go?
+
+- Go is straightforward, requiring minimal time to grasp.
+- Go supports effective concurrency programming, which aligns well with the current era of multicore processors.
+- Go features built-in _garbage collection_, eliminating the need for manual memory management as required in languages like C.
+  - _Garbage collection_ refers to the automatic management of computer memory. In languages like Go, the garbage collector is a mechanism that automatically identifies and frees up memory that is no longer in use or needed by the program. This process helps developers avoid the manual handling of memory allocation and deallocation, reducing the risk of memory leaks and making the development process more efficient. Essentially, garbage collection in Go takes care of cleaning up unsused memory, allowing developers to focus more on writing code and less on memory management details.
+- It is one of the trending programming languages in contemporary times.
+
+## Go Program Development Process
+
+Our working file, _main.go_ -> is compiled by Go Complier -> producing the binary file _main_
+
+Go supports compilation for various operating systems such as MacOS, Linux, and Windows.
+
+## Creating A Project
+
+- A Project in Go is typically referred to as a _module_.
+- To create a _module_, use the following command in the folder where we want to build it:
+  ```terminal
+    go mod init <module-name>
+  ```
+- Typically. the folder where we want to build the _module_ shares the same name with the _module_ itself. For example, if our folder is named "learning-golang", we can create the module by executing the following command:
+  ```terminal
+    go mod init learning-golang
+  ```
+
+## Main Function
+
+- Go is quite similar to C/C++ programming languages in that it requires a _main_ function.
+- The _main_ function is a function that gets executed when the program is running.
+- To define a function, the keyword used is _func_.
+- The _main_ function should be placed in a _main package_.
+- In Go, semicolons are not mandatory; we can choose whether or not to use them at the end of our code lines.
+- Go is case sensitive.
+
+Example:
+
+```go
+  // helloworld.go file
+
+  package main
+
+  func main() {
+    // ...
+  }
+```
+
+## Println
+
+- To write and output a sentence to terminal, we first need to import the _fmt_ module.
+- This is pretty similar to Java.
+- I think it's like _console.log_ in JavaScript
+
+Example:
+
+```go
+  // helloworld.go file
+
+  package main
+
+  import "fmt"
+
+  func main() {
+    fmt.Println("Hello, world!")
+  }
+```
+
+## File Compilation
+
+- Run the following command:
+  ```go
+    go build
+  ```
+- With that command, this project will attempt to find _main_ function in any files and compile it into a program that matches our current operating system. The output file will have the same name as the project. For example, if we named our project "learning-golang", the the output file will also be named "learning-golang". Subsequently, the output file can be run using terminal. On MacOs or Linux:
+  ```terminal
+  ./learning-golang
+  ```
+  On Windows:
+  ```terminal
+  ./learning-golang.exe
+  ```
+
+## Without Compilation
+
+It is used when developers are in the app development process.
+
+```terminal
+  go run <file-name>
+```
+
+## Multiple Main Function
+
+- In Go, each function within a _module_/_project_ must have a unique name. This means that we cannot create functions with the same name.
+- Therefore, if we create a new file, for example, _sample.go_, and then attempt to create a function with the same name, _main_, we won't be able to build the module because the _main_ function duplicates the one already existing in the main function of _helloworld.go_
+
+## Data Type
+
+### Number
+
+There are two data type number:
+
+#### Integer
+
+- Integer (1)
+  <table>
+    <thead>
+      <tr>
+        <th>Data Type</th>
+        <th>Minimum Value</th>
+        <th>Maximum Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>int8</td>
+        <td>-128</td>
+        <td>127</td>
+      </tr>
+      <tr>
+        <td>int16</td>
+        <td>-32768</td>
+        <td>32767</td>
+      </tr>
+      <tr>
+        <td>int32</td>
+        <td>-2147483648</td>
+        <td>2147483647</td>
+      </tr>
+      <tr>
+        <td>int64</td>
+        <td>-9223372036854775808</td>
+        <td>9223372036854775807</td>
+      </tr>
+    </tbody>
+  </table>
+
+- Integer (2)
+  <table>
+    <thead>
+      <tr>
+        <th>Data Type</th>
+        <th>Minimum Value</th>
+        <th>Maximum Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>uint8</td>
+        <td>0</td>
+        <td>255</td>
+      </tr>
+      <tr>
+        <td>uint16</td>
+        <td>0</td>
+        <td>65535</td>
+      </tr>
+      <tr>
+        <td>uint32</td>
+        <td>0</td>
+        <td>4294967295</td>
+      </tr>
+      <tr>
+        <td>uint64</td>
+        <td>0</td>
+        <td>18446744073709551615</td>
+      </tr>
+    </tbody>
+  </table>
+
+  _Note: uint -> unsigned integer_
+
+#### Floating Point
+
+<table>
+  <thead>
+    <tr>
+      <th>Data Type</th>
+      <th>Minimum Value</th>
+      <th>Maximum Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>float32</td>
+      <td>1.18x10<sup>-38</sup></td>
+      <td>3.410<sup>38</sup></td>
+    </tr>
+    <tr>
+      <td>float64</td>
+      <td>2.23x10<sup>-308</sup></td>
+      <td>1.80x10<sup>308</sup></td>
+    </tr>
+    <tr>
+      <td>complex64</td>
+      <td colspan='2'>complex numbers with float32 real and imaginary parts</td>
+    </tr>
+    <tr>
+      <td>complex128</td>
+      <td colspan='2'>complex numbers with float64 real and imaginary parts</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Alias
+
+<table>
+  <thead>
+    <tr>
+      <th>Data Type</th>
+      <th>Alias For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>byte</td>
+      <td>uint8</td>
+    </tr>
+    <tr>
+      <td>rune</td>
+      <td>int32</td>
+    </tr>
+    <tr>
+      <td>int</td>
+      <td>Minimal int32</td>
+    </tr>
+    <tr>
+      <td>uint</td>
+      <td>Minimal uint32</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Boolean
+
+- Boolean data type is a data type that has two values: true or false.
+- In Go, the Boolean data type is represented by the keyword _bool_.
+
+#### String
+
+- A string is a set of characters.
+- The total number of characters in a string can range from 0 to infinity.
+- In Go, the string data type is represented by the keyword _string_.
+- The value of string in Go always enclosed in quotation marks ("").
+- There are some built-in functions for strings, such as:
+  <table>
+    <thead>
+      <tr>
+        <th>Function</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>len("string")</td>
+        <td>Calculate the length of the string</td>
+      </tr>
+      <tr>
+        <td>"string"[number]</td>
+        <td>Take a character at a specific position based on the index (starting from 0)</td>
+      </tr>
+    </tbody>
+  </table>
+- Example:
+
+  ```go
+  package main
+
+  import "fmt"
+
+  func main() {
+    fmt.Println("Learning Golang")
+    fmt.Println("Go is Easy!")
+
+    fmt.Println(len("Go is Easy!")) // 11
+    fmt.Println("Learning Golang"[0]) // 76 (in byte type), we can convert it to string
+  }
+  ```
+
+## Variable
+
+- A variable is a storage to save data.
+- Variables are used to make data accessible from various parts of the program.
+- In Go, a variable can only store data of the same data type. If we want to store data of different types, we need to create multiple variables.
+- To create a variable, we use the keyword _var_ followed by the variable name and the its data type.
+- It is mandatory to state the data type when creating a variable, unless we directly initialize data to the variable.
+- The keyword "var" is not mandatory if we directly initialize data using _:=_ when creating a variable. If we want to change the value of the variable, we need to use the asignment operator _=_ and not _:=_.
+- We can make multiple variables in one go, the code will be cleaner.
+- All variables created in Go must be used; otherwise, when we run the code, Go will generate an error.
+- Example:
+
+  ```go
+  func main() {
+    // Printing to terminal
+    fmt.Println("Learning Golang") // "Learning Golang"
+    fmt.Println("Go is Easy!") // "Go is Easy!"
+
+    fmt.Println(len("Go is Easy!")) // 11
+    fmt.Println("Learning Golang"[0]) // 76 (in byte type), we can convert it to string
+
+    // Creating a variable
+    var name string
+    
+    name = "Eko"
+    fmt.Println(name)
+    
+    name = "Eko Kurniawan"
+    fmt.Println(name)
+
+    // Creating a variable without stating its data type
+    var grade = 100
+    fmt.Println(grade)
+
+    // Omitting "var" keyword
+    country := "Indonesia"
+    fmt.Println(country)
+
+    // Re-assigning value to the existing variable
+    country = "England"
+    fmt.Println(country)
+
+    // Creating multiple variables
+    var (
+      firstName = "Pierle"
+      lastName = "Dev"
+    )
+
+    fmt.Println(firstName) // "Pierle"
+    fmt.Println(lastName) // "Dev"
+  }
+  ```
+
+## Constant
+- A constant is a variable whose value cannot be changed after the it is assigned for the first time.
+- The keyword used is _const_, not _var_.
+- Data must be directly assigned when the constant is created.
+- We can also create multiple constants in one go.
+- Example:
+  ```go
+  package main
+
+  func main() {
+    const day = 7
+
+    // day = 8 // error re-assigning value
+
+    // Creating constants in one go
+    const (
+      firstName string = "Pierle"
+      lastName = "Dev"
+    )
+  }
+  ```
+
+### Data Type Konversion
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var value32 int32 = 32768
+  var value64 int64 = int64(value32)
+
+  // Be careful when trying to convert to a data type that can hold data with a smaller size; it can cause a problem
+  var value16 int16 = int16(value32)
+
+  fmt.Println(value32) // 32768
+  fmt.Println(value64) // 32768
+  fmt.Println(value16) // -32768 -> The maximum value of int16 is 32767. When attempting to convert 32768 to the int16 data type, it is set to the lowest number that can be stored in int16, i.e., -32768.
+
+  var num32 int32 = 32770
+  var num64 int64 = int64(num32)
+  var num16 int16 = int16(num32)
+
+  fmt.Println(num32) // 32770
+  fmt.Println(num64) // 32770
+  fmt.Println(num16) // -32766
+
+  var activity = "Learning Golang"
+  var l = activity[0] // in byte data type
+  var lString = string(l) // L
+
+  fmt.Println(activity) // "Learning Golang"
+  fmt.Println(l) // 76
+  fmt.Println(lString) // "L"
+}
+```
+
+## Type Declarations
+- Type declarations are a capability to create a new data type from an existing data type.
+- Type declarations are typically used to create an alias for an existing data type, with the aim of making it easier to understand.
+- Example:
+  ```go
+  package main
+
+  import "fmt"
+
+  func main() {
+    type NoKTP string
+
+  var myKTP NoKTP = "1234567"
+  var rikaId string = "3625281"
+
+  // converting rikaKTP to NoKTP data type
+  var rikaKTP NoKTP = NoKTP(rikaId)
+
+  fmt.Println(myKTP) // 1234567
+  fmt.Println(rikaKTP) // 3625281
+  }
+  ```
+
+## Mathematical Operations
+- Addition (+), subtraction (-), multiplication (*), division (/), modulo (%).
+- Example:
+  ```go
+  package main
+
+  import "fmt"
+
+  func main() {
+    var a = 10
+    var b = 10
+    var c = a + b
+
+    fmt.Println(c) // 20
+  }
+  ```
+
+## Augmented Assignments
+<table>
+  <thead>
+    <tr>
+      <th>Maths Operations</th>
+      <th>Augmented Assignments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a = a + 10</td>
+      <td> += 10</td>
+    </tr>
+    <tr>
+      <td>a = a - 10</td>
+      <td>a -= 10</td>
+    </tr>
+    <tr>
+      <td>a = a * 10</td>
+      <td>a *= 10</td>
+    </tr>
+    <tr>
+      <td>a = a / 10</td>
+      <td>a /= 10</td>
+    </tr>
+    <tr>
+      <td>a = a % 10</td>
+      <td>a %= 10</td>
+    </tr>
+  </tbody>
+</table>
+
+Example:
+```go
+import "fmt"
+
+func main() {
+  var i = 10
+  i += 10
+
+  fmt.Println(i) // 20
+}
+```
+
+## Unary Operator
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>++</td>
+      <td>a = a + 1</td>
+    </tr>
+    <tr>
+      <td>--</td>
+      <td>a = a - 1</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>Negative</td>
+    </tr>
+    <tr>
+      <td>+</td>
+      <td>Positive</td>
+    </tr>
+    <tr>
+      <td>!</td>
+      <td>Inverse boolean e.g. <i>!true</i> means <i>false</i></td>
+    </tr>
+  </tbody>
+</table>
