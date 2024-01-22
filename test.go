@@ -76,4 +76,14 @@ func main() {
 
   fmt.Println(myKTP) // 1234567
   fmt.Println(rikaKTP) // 3625281
+
+  var i = 1
+  i++ // i + 1
+  fmt.Println(i) // 2
+
+  i++ // i + 1
+  fmt.Println(i) // 3
+
+  i-- // i - 1
+  fmt.Println(i) // 2
 }

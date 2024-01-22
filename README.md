@@ -513,3 +513,22 @@ func main() {
     </tr>
   </tbody>
 </table>
+
+Example:
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var i = 1
+  i++ // i + 1
+  fmt.Println(i) // 2
+
+  i++ // i + 1
+  fmt.Println(i) // 3
+
+  i-- // i - 1
+  fmt.Println(i) // 2
+}
+```
