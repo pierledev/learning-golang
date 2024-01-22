@@ -532,3 +532,183 @@ func main() {
   fmt.Println(i) // 2
 }
 ```
+
+## Comparison Operation
+- Comparison operation is used for comparing two pieces of data.
+- It is an operation that yields a boolean value (_true_ or _false_).
+- Comparison operators
+  <table>
+    <thead>
+      <tr>
+        <th>Operator</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&gt;</td>
+        <td>Greater than</td>
+      </tr>
+      <tr>
+        <td>&lt;</td>
+        <td>Less than</td>
+      </tr>
+      <tr>
+        <td>&gt;=</td>
+        <td>Greater than or equal</td>
+      </tr>
+      <tr>
+        <td>&lt;=</td>
+        <td>Less than or equal</td>
+      </tr>
+      <tr>
+        <td>==</td>
+        <td>Equal to</td>
+      </tr>
+      <tr>
+        <td>!=</td>
+        <td>Not equal to</td>
+      </tr>
+    </tbody>
+  </table>
+- Example:
+  ```go
+  package main
+
+  import "fmt"
+
+  func main() {
+    var word1 = "Learning"
+    var word2 = "Golang"
+
+    var result bool = word1 == word2
+    fmt.Println(result) // false
+
+    var favNumber = 7
+    var hisFavNumber = 7
+    fmt.Println(favNumber == hisFavNumber) // true
+  }
+  ```
+
+## Boolean Operation
+- The output is either _true_ or _false_
+  <table>
+    <thead>
+      <tr>
+        <th>Operator</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&&</td>
+        <td>AND</td>
+      </tr>
+      <tr>
+        <td>||</td>
+        <td>OR</td>
+      </tr>
+      <tr>
+        <td>!</td>
+        <td>NOT</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Value 1</th>
+        <th>Operator</th>
+        <th>Value 2</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>true</td>
+        <td>&&</td>
+        <td>true</td>
+        <td>true</td>
+      </tr>
+      <tr>
+        <td>true</td>
+        <td>&&</td>
+        <td>false</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>false</td>
+        <td>&&</td>
+        <td>true</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>false</td>
+        <td>&&</td>
+        <td>false</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>true</td>
+        <td>||</td>
+        <td>true</td>
+        <td>true</td>
+      </tr>
+      <tr>
+        <td>true</td>
+        <td>||</td>
+        <td>false</td>
+        <td>true</td>
+      </tr>
+      <tr>
+        <td>false</td>
+        <td>||</td>
+        <td>true</td>
+        <td>true</td>
+      </tr>
+      <tr>
+        <td>false</td>
+        <td>||</td>
+        <td>false</td>
+        <td>false</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Operator</th>
+        <th>Value</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>!</td>
+        <td>true</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>!</td>
+        <td>false</td>
+        <td>true</td>
+      </tr>
+    </tbody>
+  </table>
+- Example:
+  ```go
+  package main
+
+  import "fmt"
+
+  func main() {
+    var finalGrade = 90
+    var attendance = 80
+
+    var passingGrade bool = finalGrade > 80
+    var passingAttendance bool = attendance > 80
+
+    var pass bool = passingGrade && passingAttendance
+    fmt.Println(pass) // false
+  }
+  ```

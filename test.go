@@ -86,4 +86,23 @@ func main() {
 
   i-- // i - 1
   fmt.Println(i) // 2
+
+  var word1 = "Learning"
+  var word2 = "Golang"
+
+  var result bool = word1 == word2
+  fmt.Println(result) // false
+
+  var favNumber = 7
+  var hisFavNumber = 7
+  fmt.Println(favNumber == hisFavNumber) // true
+
+  var finalGrade = 90
+  var attendance = 80
+
+  var passingGrade bool = finalGrade > 80
+  var passingAttendance bool = attendance > 80
+
+  var pass bool = passingGrade && passingAttendance
+  fmt.Println(pass) // false
 }
