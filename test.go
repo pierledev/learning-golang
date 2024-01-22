@@ -152,4 +152,81 @@ func main() {
   ages[2] = 27
 
   fmt.Println(ages) // [20 22 27]
+
+  var months = [12]string{
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  }
+
+  // A slice with a pointer to index 4, length 3, capacity 8 (the range from index 4 to the last index 11 is 8)
+  var slice1 = months[4:7]
+
+  // A slice with a pointer to index 6, length 3, capacity 6 (the range from index 6 to the last index 11 is 6)
+  var slice2 = months[6:9]
+
+  fmt.Println(months)
+  fmt.Println(slice1)
+  fmt.Println(slice2)
+
+  namese := [...]string{"Eko", "Alana", "Alaia", "Aisha", "Muhammad", "Christopher", "Ketut"}
+    slice := namese[4:6]
+
+  fmt.Println(slice) // [Muhammad Christopher]
+  fmt.Println(slice[0]) // Muhammad
+  fmt.Println(slice[1]) // Christopher
+
+  days := [...]string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
+  daySlice1 := days[5:]
+  daySlice1[0] = "New Friday"
+  daySlice1[1] = "New Saturday"
+  fmt.Println(days) // [Sunday, Monday, Tuesday, Wednesday, Thursday, New Friday, New Saturday]
+
+  daySlice2 := append(daySlice1, "Holiday")
+  daySlice2[0] = "Ups"
+  fmt.Println(daySlice2) // [Ups, New Saturday, Holiday]
+  fmt.Println(daySlice1) // [New Friday, New Saturday]
+  fmt.Println(days) // [Sunday, Monday, Tuesday, Wednesday, Thursday, New Friday, New Saturday]
+
+  // Create a new slice, array will automatically created by the slice
+  // newSlice := make([]string, 2, 5) or
+  var newSlice []string = make([]string, 2, 5)
+  newSlice[0] = "Eko"
+  newSlice[1] = "Eko"
+  // newSlice[2] = "Eko" -> error, because we have set the length to be 2. To add another data, we should use the _append()_ function
+
+  fmt.Println(newSlice) // [Eko Eko]
+  fmt.Println(len(newSlice)) // 2
+  fmt.Println(cap(newSlice)) // 5
+
+  newSlice2 := append(newSlice, "Adi")
+  fmt.Println(newSlice2) // [Eko Eko Adi]
+  fmt.Println(len(newSlice2)) // 3
+  fmt.Println(cap(newSlice2)) // 5
+
+  // Copy slice
+  fromSlice := days[:]
+  toSlice := make([]string, len(fromSlice), cap(fromSlice))
+
+  fmt.Println(fromSlice) // [Sunday Monday Tuesday Wednesday Thursday New Friday New Saturday]
+  fmt.Println(toSlice) // [      ]
+
+  copy(toSlice, fromSlice)
+
+  fmt.Println(toSlice) // [Sunday Monday Tuesday Wednesday Thursday New Friday New Saturday]
+
+  anArray := [...]int{1, 2, 3, 4, 5}
+  aSlice := []int{1, 2, 3, 4, 5}
+
+  fmt.Println(anArray) // [1 2 3 4 5]
+  fmt.Println(aSlice) // [1 2 3 4 5]
 }

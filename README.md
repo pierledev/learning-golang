@@ -713,7 +713,7 @@ func main() {
   }
   ```
 
-## Array
+## Data Type: Array
 - An array is a data type that holds a set of elements of the same type.
 - When creating an array, it's necessary to specify the number of elements it can contain.
 - The capacity of an array cannot be altered after its creation.
@@ -821,3 +821,163 @@ func main() {
   fmt.Println(ages) // [20 22 27]
   ```
 - In Go, there is no way to alter the array length, for example by removing an element as can be done in JavaScript with methods like _.pop()_ or _.shift()_.
+
+## Data Type: Slice
+- The data type _slice_ is a segment of an array.
+- A slice is similar to an array, with the key difference being that the size of a slice can change.
+- Slices and arrays are always connected because a slice is the data that accesses a part or the whole data in an array.
+- Slice has three important pieces of data: _pointer_, _length_, and _capacity_.
+- _Pointer_ is a reference to the first element in the array that the slice points to.
+- _Length_ is the size or length of the slice.
+- _Capacity_ is the total capacity of the slice, where the length cannot exceed the capacity.
+- Creating slice from an array
+  <table>
+    <thead>
+      <tr>
+        <th>Creating Slice</th>
+        <th>Explanation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>array[low:high]</td>
+        <td>Create a slice from an array starting from index _low_ up to index before _high_</td>
+      </tr>
+      <tr>
+        <td>array[low:]</td>
+        <td>Create a slice from an array starting from index _low_ up to the last index</td>
+      </tr>
+      <tr>
+        <td>array[:high]</td>
+        <td>Create a slice from an array starting from index 0 up to index before _high_</td>
+      </tr>
+      <tr>
+        <td>array[:]</td>
+        <td>Create a slice from an array starting from index 0 up to the last index</td>
+      </tr>
+    </tbody>
+  </table>
+- Example:
+  ```go
+  func main() {
+    var months = [12]string{
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    }
+
+    // A slice with a pointer to index 4, length 3, capacity 8 (the range from index 4 to the last index 11 is 8)
+    // One of the differences between creating an array and a slice is that when creating a slice, we don't specify the length of the slice
+    var slice1 []string = months[4:7]
+
+    // A slice with a pointer to index 6, length 3, capacity 6 (the range from index 6 to the last index 11 is 6)
+    var slice2 []string = months[6:9]
+
+    fmt.Println(months) // [January February March April May June July August September October November December]
+    fmt.Println(slice1) // [May June July]
+    fmt.Println(slice2) // [July August September]
+
+    names := [...]string{"Eko", "Alana", "Alaia", "Aisha", "Muhammad", "Christopher", "Ketut"}
+    slice := names[4:6]
+
+    fmt.Println(slice) // [Muhammad Christopher]
+    fmt.Println(slice[0]) // Muhammad
+    fmt.Println(slice[1]) // Christopher
+  }
+  ```
+- Function in _slice_
+  <table>
+    <thead>
+      <tr>
+        <th>Operation</th>
+        <th>Explanation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>len(slice)</td>
+        <td>Get the length of the slice, not the array</td>
+      </tr>
+      <tr>
+        <td>cap(slice)</td>
+        <td>Get the capacity of the slice</td>
+      </tr>
+      <tr>
+        <td>append(slice, data)</td>
+        <td>Create a new slice by adding data to the last position of slice. If the capacity is already full, a new array will be created</td>
+      </tr>
+      <tr>
+        <td>make([]dataType, length, capacity)</td>
+        <td>Create a new slice, array will automatically created by the slice</td>
+      </tr>
+      <tr>
+        <td>copy(destination, source)</td>
+        <td>Copy a slice from the source to the destination</td>
+      </tr>
+    </tbody>
+  </table>
+- Example:
+  ```go
+  func main() {
+    days := [...]string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
+    daySlice1 := days[5:]
+    daySlice1[0] = "New Friday" // the data array has also changed
+    daySlice1[1] = "New Saturday"
+    fmt.Println(days) // [Sunday, Monday, Tuesday, Wednesday, Thursday, New Friday, New Saturday]
+
+    daySlice2 := append(daySlice1, "Holiday")
+    daySlice2[0] = "Ups"
+    fmt.Println(daySlice2) // [Ups, New Saturday, Holiday]
+    fmt.Println(daySlice1) // [New Friday, New Saturday]
+    fmt.Println(days) // [Sunday, Monday, Tuesday, Wednesday, Thursday, New Friday, New Saturday]
+
+    // Create a new slice, array will automatically created by the slice
+    // newSlice := make([]string, 2, 5) or
+    var newSlice []string = make([]string, 2, 5)
+    newSlice[0] = "Eko"
+    newSlice[1] = "Eko"
+    // newSlice[2] = "Eko" -> error, because we have set the length to be 2. To add another data, we should use the _append()_ function
+
+    fmt.Println(newSlice) // [Eko Eko ]
+    fmt.Println(len(newSlice)) // 2
+    fmt.Println(cap(newSlice)) // 5
+
+    newSlice2 := append(newSlice, "Adi")
+    fmt.Println(newSlice2) // [Eko Eko Adi]
+    fmt.Println(len(newSlice2)) // 3
+    fmt.Println(cap(newSlice2)) // 5
+
+    // Copy slice
+    fromSlice := days[:]
+    toSlice := make([]string, len(fromSlice), cap(fromSlice))
+
+    fmt.Println(fromSlice) // [Sunday Monday Tuesday Wednesday Thursday New Friday New Saturday]
+    fmt.Println(toSlice) // [      ]
+
+    copy(toSlice, fromSlice)
+
+    fmt.Println(toSlice) // [Sunday Monday Tuesday Wednesday Thursday New Friday New Saturday]
+  }
+  ```
+- Be careful when creating an array, if done incorrectly, you may end up creating a slice instead of an array and vice versa.
+  ```go
+  import "fmt"
+
+  func main() {
+    anArray := [...]int{1, 2, 3, 4, 5}
+    aSlice := []int{1, 2, 3, 4, 5} // In a slice, we don't specify the length/amount of data
+
+    fmt.Println(anArray) // [1 2 3 4 5]
+    fmt.Println(aSlice) // [1 2 3 4 5]
+  }
+  ```
+- In Go, the use of arrays is less common when developing applications compared to the widespread use of slices.
