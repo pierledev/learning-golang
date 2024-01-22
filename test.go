@@ -105,4 +105,51 @@ func main() {
 
   var pass bool = passingGrade && passingAttendance
   fmt.Println(pass) // false
+
+  // Creating an array of string than will hold 3 elements
+  var names [3]string
+  fmt.Println(names)
+    
+  // Assigning elements to the array
+  names[0] = "Siregar"
+  names[1] = "Ali"
+  names[2] = "Yessica"
+
+  fmt.Println(names)
+  fmt.Println(names[0])
+  fmt.Println(names[1])
+  fmt.Println(names[2])
+
+  var values = [3]int{
+    90,
+    80,
+    95, // <= if we specify elements for an array in a vertical format like this, a comma must be placed after the last element
+  }
+
+  fmt.Println(values)
+  fmt.Println(values[0])
+
+  // If we specify an array should have 3 elements but we don't assign any value during the variable declration, then the array will have three elements of 0
+  var zeroNumbers = [3]int{}
+
+  fmt.Println(zeroNumbers) // [0 0 0]
+
+  // If we specify an array should have 3 elements but we only assign 2 elements during variable declaration, the last index will get a default value 0
+  var numbers = [3]int{20, 7}
+
+  fmt.Println(numbers)
+  fmt.Println(numbers[2])
+
+  var ages = [...]int{
+    20,
+    22,
+    25,
+  }
+
+  fmt.Println(ages) // [20 22 25]
+  fmt.Println(len(ages)) // 3
+  
+  ages[2] = 27
+
+  fmt.Println(ages) // [20 22 27]
 }

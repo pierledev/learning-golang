@@ -712,3 +712,112 @@ func main() {
     fmt.Println(pass) // false
   }
   ```
+
+## Array
+- An array is a data type that holds a set of elements of the same type.
+- When creating an array, it's necessary to specify the number of elements it can contain.
+- The capacity of an array cannot be altered after its creation.
+- We can access every element in an array with index starting from 0.
+  <table>
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Element</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0</td>
+        <td>Eko</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Kurniawan</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Khannedy</td>
+      </tr>
+    </tbody>
+  </table>
+- Example:
+  ```go
+  import "fmt"
+
+  func main() {
+    // Creating an array of string than will hold 3 elements
+    var names [3]string
+    fmt.Println(names) // []
+    
+    // Assigning elements to the array
+    names[0] = "Siregar"
+    names[1] = "Ali"
+    names[2] = "Yessica"
+
+    fmt.Println(names) // [Siregar Ali Yessica]
+    fmt.Println(names[0]) // Siregar
+    fmt.Println(names[1]) // Ali
+    fmt.Println(names[2]) // Yessica
+  }
+  ```
+- We can also create an array directly during variable declaration.
+  ```go
+  var values = [3]int{
+    90,
+    80,
+    95, // <= if we specify elements for an array in a vertical format like this, a comma must be placed after the last element
+  }
+
+  fmt.Println(values) // [90 80 95]
+  fmt.Println(values[0]) // 90
+
+  // If we specify an array should have 3 elements but we don't assign any value during the variable declration, then the array will have three elements of 0
+  var zeroNumbers = [3]int{}
+
+  fmt.Println(zeroNumbers) // [0 0 0]
+
+  // If we specify an array should have 3 elements but we only assign 2 elements during variable declaration, the last index will get a default value 0
+  var numbers = [3]int{20, 7}
+
+  fmt.Println(numbers) // [20 7 0]
+  fmt.Println(numbers[2]) // 0
+  ```
+- Function Array
+  <table>
+    <thead>
+      <tr>
+        <th>Operation</th>
+        <th>Explanation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>len(array)</td>
+        <td>Get the array length</td>
+      </tr>
+      <tr>
+        <td>array[index]</td>
+        <td>Get an element/data at a certain index position</td>
+      </tr>
+      <tr>
+        <td>array[index] = value</td>
+        <td>Change an element at a certain index position</td>
+      </tr>
+    </tbody>
+  </table>
+- We can also omit specifying the amount of elements/data that should be in an array by using [...] rather than [number of elements]. This way, the program will automatically set the length of the array to the number of elements assigned during variable declaration.
+  ```go
+  var ages = [...]int{
+    20,
+    22,
+    25,
+  }
+
+  fmt.Println(ages) // [20 22 25]
+  fmt.Println(len(ages)) // 3
+  
+  ages[2] = 27
+
+  fmt.Println(ages) // [20 22 27]
+  ```
+- In Go, there is no way to alter the array length, for example by removing an element as can be done in JavaScript with methods like _.pop()_ or _.shift()_.
