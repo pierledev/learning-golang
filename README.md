@@ -1258,3 +1258,42 @@ func main() {
     Ana
   */
   ```
+
+## break & continue
+- _break_ & _continue_ are keywords that can be used in a _loop_.
+- _break_ is used to terminate the entire _loop_.
+- _continue_ is used to stop the current iteration and immediately proceed to the next iteration of the _loop_.
+- Example:
+  ```go
+  func main() {
+    for i := 0; i < 10; i++ {
+      if i == 5 {
+        break
+      }
+
+      fmt.Println("Loop", i)
+    }
+    /*
+      Loop 0
+      Loop 1
+      Loop 2
+      Loop 3
+      Loop 4
+    */
+
+    for i := 0; i < 10; i++ {
+      if i % 2 == 0 {
+        continue
+      }
+
+      fmt.Println("Loop", i)
+    }
+    /*
+      Loop 1
+      Loop 3
+      Loop 5
+      Loop 7
+      Loop 9
+    */
+  }
+  ```

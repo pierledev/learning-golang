@@ -307,4 +307,22 @@ func main() {
   for index, name := range namesCollection {
     fmt.Println("index", index, "name", name)
   }
+
+  // Break
+  for i := 0; i < 10; i++ {
+    if i == 5 {
+      break
+    }
+
+    fmt.Println("Loop", i)
+  }
+
+  // Continue
+  for i := 0; i < 10; i++ {
+    if i % 2 == 0 {
+      continue
+    }
+
+    fmt.Println("Loop", i)
+  }
 }
