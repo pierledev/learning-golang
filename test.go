@@ -285,4 +285,13 @@ func main() {
   } else {
     fmt.Println("Ganjar Pranowo")
   }
+
+  // If with short statement
+  username := "pierledev"
+
+  if length := len(username); length > 10 {
+    fmt.Println("Username is too long")
+  } else {
+    fmt.Println("You can use that username")
+  }
 }

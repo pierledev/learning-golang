@@ -1110,3 +1110,19 @@ func main() {
     } // Anies Baswedan
   }
   ```
+
+## If with Short Statement
+- The _if_ expression supports a short statement before the condition.
+- It is very suitable for creating a simple statement before checking the condition.
+- Example:
+  ```go
+  func main() {
+    username := "pierledev"
+
+    if length := len(username); length > 10 {
+      fmt.Println("Username is too long")
+    } else {
+      fmt.Println("You can use that username")
+    } // You can use that username
+  }
+  ```
