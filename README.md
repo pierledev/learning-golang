@@ -1126,3 +1126,57 @@ func main() {
     } // You can use that username
   }
   ```
+
+## Switch Expression
+- In addition to the _if_ expression, to create _branching_, we can also use the _switch_ expression.
+- The _switch_ expression is simpler compared to the _if_ statement.
+- Typically, the _switch_ expression is used to check conditions within a single variable.
+- Example:
+  ```go
+  func main() {
+    name := "Kenang"
+
+    switch name {
+      case "Kenzo":
+        fmt.Println("Halo, Kenzo!")
+      case "Kezia":
+        fmt.Println("Halo, Kezia!")
+      case "Kenang":
+        fmt.Println("Halo, Kenang!")
+      default:
+        fmt.Println("Hi, anonim!")
+    } // Halo, Kenang!
+  }
+  ```
+- The _switch_ statement also supports a short statement before the variable's condition that will be checked.
+  ```go
+  func main() {
+    name := "Rina Ilase"
+
+    switch length := len(name); length > 5 {
+      case true:
+        fmt.Println("Name is too long")
+      case false:
+        fmt.Println("You can use that name")
+    } // Name is too long
+  }
+  ```
+- Conditions in the _switch_ expression are not mandatory.
+- If we are not using conditions in the _switch_ expression, we can include conditions in each case.
+  ```go
+  func main() {
+    name := "Pierledev"
+    
+    length := len(name)
+
+    switch {
+      case length > 10:
+        fmt.Println("Name is too long")
+      case length > 5:
+        fmt.Println("Name is quite long")
+      default:
+        fmt.Println("Perfect!")
+    }
+  }
+  ```
+- Based on the provided code, in this case, it might be better to use the _if-else_ expression.
