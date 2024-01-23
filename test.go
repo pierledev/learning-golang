@@ -229,4 +229,33 @@ func main() {
 
   fmt.Println(anArray) // [1 2 3 4 5]
   fmt.Println(aSlice) // [1 2 3 4 5]
+
+  // Map
+  // First way: creating a Map withh empty key-value pairs
+  var aisha map[string]string = map[string]string{}
+  aisha["username"] = "aisha"
+  aisha["address"] = "Lombok"
+
+  fmt.Println(aisha)
+  fmt.Println(aisha["username"])
+  fmt.Println(aisha["address"])
+
+  // Second way: creating a Map and directly set the key-value pairs
+  person := map[string]string{
+    "username": "pierledev",
+    "address": "Bandung",
+  }
+
+  fmt.Println(person) // map[address:Bandung username:pierledev]
+  fmt.Println(person["username"]) // pierledev
+  fmt.Println(person["address"]) // Bandung
+  fmt.Println(person["hobby"]) // ""
+
+  movie := make(map[string]string)
+  movie["title"] = "Hannah Montana"
+  movie["actress"] = "Miley Cyrus"
+  movie["wrong"] = "Ups"
+
+  delete(movie, "wrong")
+  fmt.Println(movie) // map[actress:Miley Cyrus title:Hannah Montana]
 }

@@ -981,3 +981,84 @@ func main() {
   }
   ```
 - In Go, the use of arrays is less common when developing applications compared to the widespread use of slices.
+
+## Data Type: Map
+- In an Array or Slice, we use index numbers/integers from 0 to access data.
+- A Map is a data type that holds a collection of homogeneous data, allowing us to specify the data type for each unique index.
+- Simply put, a Map is a data type that consists of key-value pairs, where each key must be unique.
+- In contrast Arrays and Slices, a Map can accomodate an unlimited amount of data, as long as the keys are distict. If the same key is used, the previous data will be automatically replaced by the new data.
+- Function Map:
+  <table>
+    <thead>
+      <tr>
+        <th>Operation</th>
+        <th>Explanation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>len(map)</td>
+        <td>Retrieve the length of the data in a Map</td>
+      </tr>
+      <tr>
+        <td>map[key]</td>
+        <td>Retrieve the data associated with the specified key</td>
+      </tr>
+      <tr>
+        <td>map[key] = value</td>
+        <td>Modify data associated with a specific key</td>
+      </tr>
+      <tr>
+        <td>var <i>variable name</i> map[TypeKey]TypeValue = map[TypeKey]TypeValue{}</td>
+        <td>Create a new Map</td>
+      </tr>
+      <tr>
+        <td><i>variable name</i> := map[TypeKey]TypeValue{[key]: [value]}</td>
+        <td>Create a new Map</td>
+      </tr>
+      <tr>
+        <td>make(map[TypeKey]TypeValue)</td>
+        <td>Create a new Map</td>
+      </tr>
+      <tr>
+        <td>delete(map, key)</td>
+        <td>Remove data associated with the specified key</td>
+      </tr>
+    </tbody>
+  </table>
+- Example:
+  ```go
+  import "fmt"
+
+  func main() {
+    // First way: creating a Map withh empty key-value pairs
+    var aisha map[string]string = map[string]string{}
+    aisha["username"] = "aisha"
+    aisha["address"] = "Lombok"
+
+    fmt.Println(aisha) // map[address:Lombok username:aisha]
+    fmt.Println(aisha.username) // aisha
+    fmt.Println(aisha.address) // Lombok
+
+    // Second way: creating a Map and directly set the key-value pairs
+    person := map[string]string{
+      "username": "pierledev",
+      "address": "Bandung",
+    }
+
+    fmt.Println(person) // map[address:Bandung username:pierledev]
+    fmt.Println(person["username"]) // pierledev
+    fmt.Println(person["address"]) // Bandung
+
+    // When attempting to access a value using a key that does not exist in our Map, it will return an default value and the type of the value will be depend on the Map type that we have specified. If we have specified the Map to be of string type, the default value will be an empty string
+    fmt.Println(person["hobby"]) // ""
+
+    movie := make(map[string]string)
+    movie["title"] = "Hannah Montana"
+    movie["actress"] = "Miley Cyrus"
+    movie["wrong"] = "Ups"
+
+    delete(movie, "wrong")
+    fmt.Println(movie)
+  }
+  ```
