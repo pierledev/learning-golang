@@ -1072,8 +1072,24 @@ func main() {
   func main() {
     name := "Pierle"
 
-    if(name == "Pierle") {
+    if name == "Pierle" {
       fmt.Println("Hello, Pierle!") // Hello, Pierle!
+    }
+  }
+  ```
+
+## Else Expression
+- The _if_ block is executed when the _if_ condition evaluates to _true_.
+- The _else_ expression is used to execute a specific program when the condition evaluates to _false_.
+- Example:
+  ```go
+  func main() {
+    money := 100
+
+    if money > 140 {
+      fmt.Println("Buy the sneakers!!")
+    } else {
+      fmt.Println("Save your money!!") // Save your money!!
     }
   }
   ```
