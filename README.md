@@ -1297,3 +1297,9 @@ func main() {
     */
   }
   ```
+
+## Function
+- Before, we already knew a function that is mandatory to be made so that our program can run, function _main_.
+- Function is a code block that is sengaja dibuat in a program so we can use it many times.
+- We use the keyword _func_ to make a function followed by the function name and the block code inside the function.
+- After creating a function, we can execute it by calling it using the function name followed by parentheses.
