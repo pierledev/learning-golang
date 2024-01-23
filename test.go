@@ -274,4 +274,15 @@ func main() {
   } else {
     fmt.Println("Save your money!!")
   }
+
+  // Else if expression
+  candidateNumber := 1
+
+  if candidateNumber== 1 {
+    fmt.Println("Anies Baswedan")
+  } else if candidateNumber == 2 {
+    fmt.Println("Prabowo Subianto")
+  } else {
+    fmt.Println("Ganjar Pranowo")
+  }
 }

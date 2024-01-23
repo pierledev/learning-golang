@@ -1089,7 +1089,24 @@ func main() {
     if money > 140 {
       fmt.Println("Buy the sneakers!!")
     } else {
-      fmt.Println("Save your money!!") // Save your money!!
-    }
+      fmt.Println("Save your money!!")
+    } // Save your money!!
+  }
+  ```
+
+## Else If Expression
+- We use the _else if_ expression when we need to evaluate multiple conditions.
+- Example:
+  ```go
+  func main() {
+    candidateNumber := 1
+
+    if candidateNumber== 1 {
+      fmt.Println("Anies Baswedan")
+    } else if candidateNumber == 2 {
+      fmt.Println("Prabowo Subianto")
+    } else {
+      fmt.Println("Ganjar Pranowo")
+    } // Anies Baswedan
   }
   ```
