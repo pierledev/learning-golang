@@ -1307,20 +1307,67 @@ func main() {
 - We can set more than 1 parameter.
 - Parameter is not mandatory.
 - Parameters are not mandatory, but if we define a function with parameters, we must provide data (arguments) for those parameters when calling the function.
+- Functions can return a value or multiple values.
+- To indicate that a function returns a value/multiple values, we should specify the data type expected to be returned by the function one by one
+- If we declare a function with a return data type, it is mandatory to return data wthin the function.
+- To return a value from a function, we can use the _return_ keyword followed by the value/data.
+- Multiple return values must be captured for all the values.
+- If we want to ignore the return values, we can use the underscore *_* symbol.
+- Named return values. Typically, when we indicate that a function returns a value, we declare the data type of the returned value in the function. However, we can also create variables directly in the function's return data type.
 - Example:
   ```go
   // Without parameter
   func sayHello() {
-    fmt.Println("Hello") // Hello
+    fmt.Println("Hello")
   }
 
   // With parameters
   func sayHelloTo(firstName string, lastName string) {
-    fmt.Println("Hello", firstName, lastName, "!") // Hello Robert Agung !
+    fmt.Println("Hello", firstName, lastName, "!")
+  }
+
+  // Return a value
+  func getHello(name string) string {
+    return "Hello " + name
+  }
+
+  // Return multiple values
+  func getFullName() (string, string) {
+    return "Komang", "Ida"
+  }
+
+  func getCompleteName() (username, email, phone string) {
+    username = "chika"
+    email = "chika@gmail.com"
+    phone = "08726241233"
+
+    return username, email, phone
+  }
+
+  func getGrade() (name string, grade int) {
+    name = "Ario"
+    grade = 90
+
+    return ario, grade
   }
 
   func main() {
-    sayHello()
-    sayHelloTo("Robert", "Agung")
+    sayHello() // Hello
+    sayHelloTo("Robert", "Agung") // Hello Robert Agung !
+    
+    result := getHello("Rika")
+    fmt.Println(result) // Hello Rika
+
+    firstName, lastName := getFullName()
+    fmt.Println(firstName, lastName) // Komang, Ida
+
+    name, _ := getFullName()
+    fmt.Println(name) // Komang
+
+    username, email, phone := getCompleteName()
+    fmt.Println(username, email, phone) // chika, chika@gmail.com, 08726241233
+
+    _, grade := getGrade()
+    fmt.Println(grade) // 90
   }
   ```
