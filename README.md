@@ -1166,7 +1166,7 @@ func main() {
   ```go
   func main() {
     name := "Pierledev"
-    
+
     length := len(name)
 
     switch {
@@ -1180,3 +1180,81 @@ func main() {
   }
   ```
 - Based on the provided code, in this case, it might be better to use the _if-else_ expression.
+
+## For Loops
+- In programming languages, there is typically a feature called a _loop_.
+- One of the _loop_ features is _for loop_.
+- Example:
+  ```go
+  func main() {
+    counter := 1
+
+    for counter <= 10 {
+      fmt.Println("Loop ", counter)
+      counter++
+    }
+
+    fmt.Println("Finish")
+    /*
+      Loop 1
+      Loop 2
+      Loop 3
+      Loop 4
+      Loop 5
+      Loop 6
+      Loop 7
+      Loop 8
+      Loop 9
+      Loop 10
+      Finish
+    */
+  }
+  ```
+- Inside the _for_ loop, we can add statements, and there are two types of statements that can be included in th _for_ loop:
+  - _Init statement_: a statement executed before the _for_ loop begins.
+  - _Post statement_: a statement executed at the end of each iteration of the loop.
+  ```go
+  func main() {
+    for counter := 1; counter <= 10; counter++ {
+      fmt.Println("Loop", counter)
+    }
+
+    // counter := 1 -> init statement
+    // counter <= 10 -> condition
+    // counter++ -> post statement
+  }
+  ```
+- The _for_ loop can be used to iterate over all elements in a data collection, such as an Array, Slice, or Map.
+  ```go
+  // Manual
+  names := []string{"Andika", "Chris", "Ana"}
+
+  for i := 0; i < len(names); i++ {
+    fmt.Println(names[i])
+  }
+  /*
+    Andika
+    Chris
+    Ana
+  */
+
+  // With for range
+  for index, name := range names {
+    fmt.Println("index", index, "=", name)
+  }
+  /*
+    index 0 = Andika
+    index 1 = Chris
+    index 2 = Ana
+  */
+
+  // With for range, but we don't use the indexes
+  for _, name := range names {
+    fmt.Println(name)
+  }
+  /*
+    Andika
+    Chris
+    Ana
+  */
+  ```

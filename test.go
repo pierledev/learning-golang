@@ -294,4 +294,17 @@ func main() {
   } else {
     fmt.Println("You can use that username")
   }
+
+  // For loop
+  // Manual
+  namesCollection := []string{"Andika", "Chris", "Ana"}
+
+  for i := 0; i < len(namesCollection); i++ {
+    fmt.Println(namesCollection[i])
+  }
+
+  // With for range
+  for index, name := range namesCollection {
+    fmt.Println("index", index, "name", name)
+  }
 }
