@@ -258,4 +258,11 @@ func main() {
 
   delete(movie, "wrong")
   fmt.Println(movie) // map[actress:Miley Cyrus title:Hannah Montana]
+
+  // if Expression
+  myName := "Pierle"
+
+  if(myName == "Pierle") {
+    fmt.Println("Hello, Pierle!")
+  }
 }

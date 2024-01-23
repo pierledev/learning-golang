@@ -1059,6 +1059,21 @@ func main() {
     movie["wrong"] = "Ups"
 
     delete(movie, "wrong")
-    fmt.Println(movie)
+    fmt.Println(movie) // map[actress:Miley Cyrus title:Hannah Montana]
+  }
+  ```
+
+## If Expression
+- _If_ is one of the keywords used for _branching_ in programming.
+- _Branching_ allows the execution of specific code when a certain condition is met.
+- the majority of programming languages support the _if expression_.
+- Example:
+  ```go
+  func main() {
+    name := "Pierle"
+
+    if(name == "Pierle") {
+      fmt.Println("Hello, Pierle!") // Hello, Pierle!
+    }
   }
   ```
