@@ -1297,3 +1297,30 @@ func main() {
     */
   }
   ```
+
+## Function
+- Earlier, we learned about a mandatory function to be created for our program to run, the _main_ function.
+- A function is a deliberately created code block in a program that can be used multiple times.
+- To create a function, we use the _func_ keyword, followed by the function name and the code block inside the function.
+- After creating a function, we can execute it by calling it using the function name followed by parentheses.
+- When creating a function, sometimes we need data from outside, which we refer to as arguments passed into function parameters.
+- We can set more than 1 parameter.
+- Parameter is not mandatory.
+- Parameters are not mandatory, but if we define a function with parameters, we must provide data (arguments) for those parameters when calling the function.
+- Example:
+  ```go
+  // Without parameter
+  func sayHello() {
+    fmt.Println("Hello") // Hello
+  }
+
+  // With parameters
+  func sayHelloTo(firstName string, lastName string) {
+    fmt.Println("Hello", firstName, lastName, "!") // Hello Robert Agung !
+  }
+
+  func main() {
+    sayHello()
+    sayHelloTo("Robert", "Agung")
+  }
+  ```
