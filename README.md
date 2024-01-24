@@ -1859,3 +1859,70 @@ func main() {
     }
   }
   ```
+
+## Pointer
+- By default, all variables in Go are passed by value and not by reference. This means that when we send a variable to a function, method, or other variables, what is actually sent is a duplication of its value. Therefore, when we modify the data, the original data remains safe and unaffected because the modification does not use a reference or point to the same memory location.
+- In other programming language like in JavaScript, objects (including arrays and functions) are assigned and passed by reference, while primitive types (like numbers and strings) are assigned and passed by value. In JavaScript, when we assign an object to another variable, both variables reference the same object in memory. Therefore, modifications to the object through one variable will affect the other. This is different from Go's behavior, where variables hold independent copies of their values.
+  ```go
+  // Go
+  package main
+
+  import "fmt"
+
+  type Address struct {
+    City, Province, Country string
+  }
+
+  func main() {
+    // Creating an instance of the Address struct
+    address1 := Address{"Subang", "Jawa Barat", "Indonesia"}
+    
+     // Creating a new variable and copying the values from address1
+    address2 := address1 // Copy value
+
+    // Modifying the City field in the new variable
+    address2.City = "Bandung"
+
+    // Printing the original and modified variables
+    fmt.Println(address1) // City remains as "Subang"
+    fmt.Println(address2) // City is now "Bandung"
+  }
+  ```
+  ```js
+  // JavaScript
+  let address1 = { city: "Subang", province: "Jawa Barat", country: "Indonesia" };
+
+  // Creating a new variable and referencing the same object
+  let address2 = address1;
+
+  // Modifying the city property in the new variable
+  address2.city = "Bandung";
+
+  // Printing the original and modified variables
+  console.log("Original Address:", address1); // City is now "Bandung"
+  console.log("Modified Address:", address2); // City is also "Bandung"
+  ```
+- A pointer is a capability to create a reference to the data location in the same memory without duplicating the existing data.
+- In simple words, with the ability of pointers, we can achieve pass by reference.
+- To assign a variable with the pointer value to another variable, we can use operator _&_ followed by the variable name.
+  ```go
+  type Address struct {
+    City, Province, Country string
+  }
+
+  func main() {
+    address1 := Address{"Subang", "Jawa Barat", "Indonesia"}
+    address2 := &address1 // address2 is set to have the data that has the same location with address1 // &address1 -> pointer to address1
+
+    /*
+    OR
+    var address1 Address = Address{"Subang", "Jawa Barat", "Indonesia"}
+    var address2 *Address = &address2
+    */
+    
+    address2.City = "Bandung"
+
+    fmt.Println(address1) // City is now Bandung
+    fmt.Println(address2) // City is also Bandung 
+  }
+  ```
