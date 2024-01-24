@@ -2113,3 +2113,26 @@ func main() {
     fmt.Println(result) // Hello Eko
   }
   ```
+
+## Access Modifier
+- In other programming languages, there is usually a keyword that can be used to specify an access modifier for a function or variable.
+- However, in Go, you can determine the access modifier simply by the name of the function/variable/struct/interface.
+- If the name begins with a capital letter, it means it can be accessed from other packages. If it starts with a lowercase letter, it means it cannot be accessed from other packages.
+  ```go
+  package helper
+
+
+  // Can't be accesse from other packages
+  var version = "1.0.0"
+
+  func sayGoodBye(name string) string {
+    return "Hello " + name
+  }
+
+  // Can be acessed from other packages
+  var Application = "golang"
+
+  func SayGoodBye(name string) string {
+    return "Hello " + name
+  }
+  ```
