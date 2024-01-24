@@ -1513,3 +1513,19 @@ func main() {
     fmt.Println(factorialRecursive(10)) // 3628800
   }
   ```
+
+## Closures
+- Closure refers to a function's capability to interact with data within the same scope. It's crucial to use this feature wisely when developing applications.
+  ```go
+  func main() {
+    counter := 0
+    increment := func() { // anynomous function
+      fmt.Println("Increment")
+      counter++
+    }
+
+    increment()
+    increment()
+    fmt.Println(counter) // 2
+  }
+  ```
