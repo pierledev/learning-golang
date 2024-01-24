@@ -2090,7 +2090,7 @@ func main() {
 - A package is a container used to organize program code in Go.
 - By utilizing packages, we can structure and organize the code we create.
 - In essence, a package corresponds to a directory or folder in our operating system.
-- The name of a Go package should match the name of the folder or directory in which the Go files of the package are stored. This is a convention in Go. This helps Go tools and developers maintain a consistent and predictable structure for organizing code. For example, if we have our existing folder "learning-golang" and we make another folder inside it called _helper_, create a Go file inside it also named _helper_. At the very beginning of that file, write:
+- The name of a Go package should match the name of the folder or directory in which the Go files of the package are stored. This is a convention in Go. This helps Go tools and developers maintain a consistent and predictable structure for organizing code. For example, if we have our existing folder "learning-golang" and we make another folder inside it called _helper_, create a Go file inside it also named _helper_ or other name. At the very beginning of that file, write:
   ```go
   package helper
 
@@ -2100,7 +2100,7 @@ func main() {
   ```
 - To use the package, we use _import_.
 - In standard practice, a Go file can only access other Go files that belong to the same package.
--  If we want to access Go files outside of the package, we can use _import_. For example if we want to ue _helper_ package inside _main.go_ file in the root folder a.k.a "learning-golang", then we should write the following code:
+-  If we want to access Go files outside of the package, we can use _import_. For example if we want to use _helper_ package inside _main.go_ file in the root folder a.k.a "learning-golang", then we should write the following code:
   ```go
   // main.go
   import (
@@ -2134,5 +2134,53 @@ func main() {
 
   func SayGoodBye(name string) string {
     return "Hello " + name
+  }
+  ```
+
+## Package Initialization
+- When creating a package in Go, we have the option to include a function that will be accessed automatically when our package is used. 
+- This is particularly useful, for instance, when our package contains functions related to database communication, and we want to establish a connection to the database during initialization.
+- To create a function that is automatically accessed when the package is used, we simply need to name the function _init_.
+- For instance, let's say we create a new folder named "database" and inside it, a file named "mysql." We then write the following code inside the "mysql" file:
+  ```go
+  package database
+
+  var connection string
+
+  func init() {
+    connection = "MySQL"
+  } // the init function will be automatically called when we use the "database" package.
+
+  func GetDatabase() string {
+    return connection
+  }
+  ```
+  Now, let's use the "database" package in the main.go file located in the root folder of "learning-golang":
+  ```go
+  package main
+
+  import (
+    "learning-golang/database" // <module-name>/<package-name>
+    "fmt"
+  )
+
+  func main() {
+    fmt.Println(database.GetDatabase())
+  }
+  ```
+  By importing the "learning-golang/database" package, the init() function inside the "mysql" file will be automatically executed without the need for an explicit call.
+- Sometimes, we might only be interested in running the _init_ function in a package without necessarily executing one of the functions that exist in the package. 
+-  By default, Go would raise complaints if an imported package is left unused.
+- To address this, we can employ the use of the _blank identifier_ (_) before the package name during the import. Here, the underscore before the package name signals to Go that we are intentionally importing the package for the side effects (like the execution of init), and it suppresses the unused import complaint.
+  ```go
+  package main
+
+  import (
+    _ "learning-golang/database"
+  )
+
+  func main() {
+    // The 'database' package is imported with the blank identifier,
+    // allowing the 'init' function to be executed without complaints
   }
   ```
