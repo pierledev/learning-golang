@@ -1816,3 +1816,46 @@ func main() {
     // Output: Empty data
   }
   ```
+
+## Type Assertions
+- _Type Assertions_ is a capability to convert a data type to a desired data type.
+- This feature is often used when we dealing an empty data interface.
+  ```go
+  func random() interface{} {
+    return "OK"
+  }
+
+  func main() {
+    /*
+    result := random()
+    resultString := result.(string) // convert from any (interface{} type is any) to string
+    fmt.Println(resultString) // OK
+
+    resultInt := result.(int)
+    fmt.Println(resultInt) // panic
+    */
+
+    // OR
+    var result any = random()
+    var resultString string = result.(string)
+    fmt.Println(resultString) // OK
+
+    var resultInt int = result.(int)
+    fmt.Println(resultInt) // panic
+  }
+  ```
+- When we incorrectly use _type assertions_, it can lead to a panic in our application. If a _panic_ occurs and is not recovered, the program will terminate automatically. To ensure safety, a better approach for type assertion is to first check the data type in use and then perform _type assertion_ using a _switch_ expression.
+  ```go
+  func main() {
+    result := random()
+
+    switch value := result.(type) {
+      case string:
+        fmt.Println("String", value)
+      case int:
+        fmt.Println("Int", value)
+      default:
+        fmt.Println("Unknown")
+    }
+  }
+  ```
