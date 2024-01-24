@@ -1713,3 +1713,67 @@ func main() {
     rully.sayHello("Radit") // Hello Radit my name is Rully
   }
   ```
+
+## Interface
+- An _interface_ is an Abstract data type without direct implementation.
+- It consists of method definitions.
+- Generally, an _interface_ is utilized as a form of _contract_. A contract implies that there must be code that implements it.
+- Any data type that conforms to the contract of the interface is considered to be of that interface type, thus, there is no need to manually implement the interface.
+- This is somewhat different from other programming languages where, when creating an interface, we must explicitly specify which interface is being implemented.
+  ```go
+  type HasName interface {
+    GetName() string // the code that implements this interface must have method GetName that returns string data type
+  }
+
+  func SayHello(value HasName) {
+    fmt.Println("Hello", value.GetName())
+  }
+
+  type Person struct {
+    Name string
+  }
+
+  // In general, a person is an implementation of the HasName interface.
+  func (person Person) GetName() string {
+    return person.Name
+  }
+
+  func main() {
+    person := Person{Name: "Eko"}
+    SayHello(person) // Hello Eko
+  }
+
+  type Animal struct {
+    Name string
+  }
+
+  func (animal Animal) GetName() string {
+    return animal.Name
+  }
+
+  animal := Animal{Name: "Cat"}
+  SayHello(animal) // Hello Cat
+  ```
+- Go is not an object oriented programming language.
+- Typically, in object-oriented programming languages, there is a single parent data type at the top that can be considered as the root for all data implementations in that programming language; for example, in Java, there is java.lang.Object.
+- To handle such cases in Go, we can use an empty interface.
+- An empty interface is an interface that does not have any method declarations, making automatically every data type an implementation of it.
+- The empty interface is also given a type alias named _any_. type any = interface{}.
+- There are examples of the use of th empty interface in Go:
+  - fmt.Println(a ...interface{})
+  - panic(v interface{})
+  - recover() interface{}
+  - etc.
+- So, when we use methods like fmt.Println, panic, or recover in Go, the parameters are of type empty interface (interface{}). This allows these functions to accept arguments of any type. The empty interface is a powerful feature in Go that provides flexibility in handling various types of data without explicitly specifying their types.
+  ```go
+  func Ups() interface{} { // iterface{} or any
+    // return 1 it can returns int
+    // return true it can also return bool
+    return "Ups" // it can also return string and any other types
+  }
+
+  func main() {
+    empty := Ups()
+    fmt.Println(empty)
+  }
+  ```
