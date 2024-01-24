@@ -1990,3 +1990,126 @@ func main() {
     fmt.Println(address2) // &{"" "" "Indonesia"}
   }
   ```
+
+## Pointer in Function
+- When we create a parameter in a function, by default, it is pass by value, meaning the data will be copied and then sent to the function.
+- Therefore, if we change the data in a function, the original data will never be altered.
+- This makes variables secure, as they cannot be modified.
+- However, sometimes we want to create a function that can change the original data parameter.
+- To achieve this, we can use a pointer in a function's parameter.
+- To make a parameter a pointer, we can use the _*_ operator in the parameter.
+  ```go
+  // Example for code that is not yet using a pointer
+  type Address struct {
+    City, Province, Country string
+  }
+
+  func ChangeAddressToIndonesia(address Address) {
+    address.Country = "Indonesia"
+  }
+
+  func main() {
+    address := Address{"Subang", "Jawa Barat", ""}
+    ChangeAddressToIndonesia(address)
+
+    fmt.Println(address) // not changed {"Subang" "Jawa Barat" ""}
+  }
+  ```
+  ```go
+  // Example for code that is  using a pointer
+  type Address struct {
+    City, Province, Country string
+  }
+
+  func ChangeAddressToIndonesia(address *Address) {
+    address.Country = "Indonesia"
+  }
+
+  func main() {
+    var address *Address := &Address{"Subang", "Jawa Barat", ""}
+    ChangeAddressToIndonesia(address)
+
+    fmt.Println(address) // changed to {"Subang" "Jawa Barat" "Indonesia"}
+  }
+  ```
+  ```go
+  // If we've already created it as a non-pointer, we can simply add '&' directly to the function argument.
+  type Address struct {
+    City, Province, Country string
+  }
+
+  func ChangeAddressToIndonesia(address *Address) {
+    address.Country = "Indonesia"
+  }
+
+  func main() {
+    address := Address{"Subang", "Jawa Barat", ""}
+    ChangeAddressToIndonesia(&address) // <= here
+
+    fmt.Println(address) // changed to {"Subang" "Jawa Barat" "Indonesia"}
+  }
+  ```
+- Although methods are attached to a struct, the data struct accessed in a method is actually passed by value.
+- **It's recommended to use pointers in methods to avoid unnecessary memory duplication when calling methods.**
+  ```go
+  // Without pointer
+  type Man struct {
+    Name string
+  }
+
+  func (man Man) Married() {
+    man.Name = "Mr. " + man.Name
+  }
+
+  func main() {
+    eko := Man{"Eko"}
+    eko.Married()
+
+    fmt.Println(eko.Name) // Eko, not Mr.Eko because the Married function accepts a parameter by value, creating a copy and not using a reference to the original variable/argument
+  }
+  ```
+  ```go
+  // With pointer
+  type man struct {
+    Name string
+  }
+
+  func (man *Man) Married() {
+    man.Name = "Mr. " + man.Name
+  }
+
+  func main() {
+    eko := Man{"Eko"}
+    eko.Married()
+
+    fmt.Println(eko.Name) // Mr. Eko
+  }
+  ```
+
+## Package & Import
+- A package is a container used to organize program code in Go.
+- By utilizing packages, we can structure and organize the code we create.
+- In essence, a package corresponds to a directory or folder in our operating system.
+- The name of a Go package should match the name of the folder or directory in which the Go files of the package are stored. This is a convention in Go. This helps Go tools and developers maintain a consistent and predictable structure for organizing code. For example, if we have our existing folder "learning-golang" and we make another folder inside it called _helper_, create a Go file inside it also named _helper_. At the very beginning of that file, write:
+  ```go
+  package helper
+
+  func SayHello(name string) string {
+    return "Hello " + name
+  }
+  ```
+- To use the package, we use _import_.
+- In standard practice, a Go file can only access other Go files that belong to the same package.
+-  If we want to access Go files outside of the package, we can use _import_. For example if we want to ue _helper_ package inside _main.go_ file in the root folder a.k.a "learning-golang", then we should write the following code:
+  ```go
+  // main.go
+  import (
+    "learning-golang/helper"
+    "fmt"
+  )
+
+  func main() {
+    result := helper.SayHello("Eko")
+    fmt.Println(result) // Hello Eko
+  }
+  ```
