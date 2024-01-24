@@ -1965,3 +1965,28 @@ func main() {
     fmt.Println(address2) // {Jakarta DKI Jakarta Indonesia}
   }
   ```
+
+## New Operator
+- Earlier, we created pointers using the _&_ operator.
+- Go also provides a _new_ function that can be used to create a _pointer_.
+- However, the _new_ function can only return a _pointer_ to an empty data, meaning there is no initial data assigned.
+  ```go
+  type Address struct {
+    City, Province, Country string
+  }
+
+  func main() {
+    // Creating pointer not with the 'new' function
+    var address1 *Address = &Address{}
+    var address2 *Address = address1
+
+    // Creating pointer with the 'new' function
+    address1 := new(Address) // pointer to Address
+    address2 := adddress1 // also pointer to address1
+
+    address2.Country = "Indonesia" // the result is, all pointers to the data Country changed to Indonesia
+
+    fmt.Println(address1) // &{"" "" "Indonesia"}
+    fmt.Println(address2) // &{"" "" "Indonesia"}
+  }
+  ```
