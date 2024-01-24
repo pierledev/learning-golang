@@ -1777,3 +1777,42 @@ func main() {
     fmt.Println(empty)
   }
   ```
+
+## Nil
+- Typically, in other programming languages, an object that has not been initialized will automatically have _null_ or _nil_ as its value.
+- In Go, when we create a variable with a certain data type, it automatically gets a default value.
+- However, in Go, there is special value called _nil_, representing an empty data.
+- _Nil_ itself can only be used with certain data types, such as _interface_, _function_, _map_, _slice_, _pointer_, and _channel_.
+  ```go
+  // Invalid because nil cannot be used with data type string
+  func check(name string) string {
+    if name == "" {
+      return nill
+    } else {
+      return name
+    }
+  }
+
+  // Valid
+  func NewMap(name string) map[string]string {
+    if name == "" {
+      return nil
+    } else {
+      return map[string]string {
+        "name": name,
+      }
+    }
+  }
+
+  func main() {
+    data := NewMap("")
+
+    if(data == nil) {
+      fmt.Println("Empty data")
+    } else {
+      fmt.Println(data)
+    }
+
+    // Output: Empty data
+  }
+  ```
