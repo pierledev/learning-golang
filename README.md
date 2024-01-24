@@ -1371,3 +1371,145 @@ func main() {
     fmt.Println(grade) // 90
   }
   ```
+- The last parameter in a function has the ability to be a varargs.
+- Varargs means the parameter can receive more than one input or can be considered similar to an Array
+- The difference between regular parameters and the array data is:
+  - For the parameter with an array type, it is madatory to create an array before sending it to the function.
+  - For a parameter using varargs, we can directly send the data, and if there is more than one value, we can use a colon.
+- Example:
+  ```go
+  func sumAll(numbers ...int) int { // numbers here is actually a slice of integers []int
+    total := 0
+
+    for _, number := range numbers {
+      total += number
+    }
+
+    return total
+  }
+
+  func main() {
+    total := sumAll(10, 10, 10, 10, 10, 10)
+    fmt.Println(total) // 60
+  }
+  ```
+- Sometimes, there are some cases where we use a Variadic Function, but we have a variable in the form of a slice. We can convert the slice to be a vararg parameter.
+  ```go
+  func sumAll(numbers ...int) int { // numbers here is actually a slice of integers []int
+    total := 0
+
+    for _, number := range numbers {
+      total += number
+    }
+
+    return total
+  }
+
+  func main() {
+    total := sumAll(10, 10, 10, 10, 10, 10)
+    ft.Println(total) // 60
+
+    numbers := []int{10, 10, 10} // slice
+    total = sumAll(numbers...) // convert slice data to varargs
+    fmt.Println(total) // 30
+  }
+  ```
+- A function is a first-class citizen.
+- Additionnally, a function is a data type and can be stored in a variable.
+  ```go
+  func getGoobBye(name string) string {
+    return "Good Bye " + name
+  }
+
+  func main() {
+    goodbye := getGoodBye
+    fmt.Println(goodbye("Eko")) // Good Bye Eko
+  }
+  ```
+- A function cannot only be stored in a variable as a value, but can also be used as a parameter for aother function, _function as parameter_.
+  ```go
+  func sayHelloWithFilter(name string, filter func(string) string) {
+    fmt.Println("Hello ", filter(name))
+  }
+
+  func spamFilter(name string) string {
+    if name === "Bitchie" {
+      return "..."
+    } else {
+      return name
+    }
+  }
+
+  func main() {
+    sayHelloWithFilter("Bitchie", spamFilter) // Hello ...
+  }
+  ```
+- Type declarations can be used to create an alias for a function, making it easier to use the function as a parameter.
+  ```go
+  type Filter func(string) string
+
+  func sayHelloWithFilter(name string, filter Filter) {
+    fmt.Println("Hello ", filter(name))
+  }
+
+  func spamFilter(name string) string {
+    if name == "Bitchie" {
+      return "..."
+    } else {
+      return name
+    }
+  }
+  ```
+- An _anonymous function_, also known as a function without a name, allows us to create a function directly in a variable or parameter without the need to define a function separately. Earlier, every time we created a function, a name was always assigned to it. However, sometimes it is easier to use a function directly without the need for a predefined name.
+  ```go
+  type Blacklist func(string) bool
+
+  func registerUser(name string, blacklist Blacklist) {
+    if(blacklist(name) {
+      fmt.Println("Your are blocked", name)
+    } else {
+      fmt.Println("Welcome", name)
+    })
+  }
+
+  func main() {
+    // The first way
+    blacklist := func(name string) bool {
+      return name === "Bitchie"
+    }
+
+    registerUser("Andini", blacklist) // Welcome Andini
+
+    // The second way
+    registerUser("Bitchie", func(name string) bool {
+      return name == "Bitchie"
+    }) // you are blocked Bitchie
+  }
+  ```
+- A _recursive function_ is a function that calls itself.  One illustrative example is the calculation of a _factorial_.
+  ```go
+  // Factorial with loop
+  func factorialLoop(value int) int {
+    result := 1
+    for i := value; i > 0; i-- {
+      result *= i
+    }
+    
+    return result
+  }
+
+  // Factorial with recursive
+  func factorialRecursive(value int) int {
+    if value == 1 {
+      return 1
+    } else {
+      return value * factorialRecursive(value - 1)
+    }
+  }
+
+  func main() {
+    fmt.Println(factorialLoop(10)) // 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1 = 3628800
+
+    fmt.Println(factorialRecursive(10)) // 3628800
+  }
+  ```
