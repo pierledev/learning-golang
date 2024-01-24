@@ -1637,3 +1637,16 @@ func main() {
     */
   }
   ```
+
+## Comment
+- The best comment for a code is the code itself.
+- Write code for maximum readability, keeping it clear and straightforward.
+- Add comments only when necessary for additional context.
+  ```go
+  // This is a single line comment
+
+  /*
+    This is
+    multiline comment
+  */
+  ```
