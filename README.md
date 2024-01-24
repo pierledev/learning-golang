@@ -1650,3 +1650,66 @@ func main() {
     multiline comment
   */
   ```
+
+## Struct
+- _Struct_ is a data template/data prototype used to combine zero or more data types into a unified entity.
+- Typically, _structs_ represent data in an application program that we create.
+- Data in a _struct_ is stored in a _field_.
+- In simple terms, a _struct_ is a collection of _fields_.
+- Struct cannot be used directly.
+- However, we can create data or objects from the struct that we have defined.
+  ```go
+  type Customer struct {
+    Name, Address string
+    Age           int
+  }
+
+  func main() {
+    var loyalCustomer1 Customer
+    fmt.Println(loyalCustomer1) // {"" "" 0} // default values for data created with the Customer struct
+
+    loyalCustomer1.Name = "Jacob"
+    loyalCustomer1.Address = "SCBD"
+    loyalCustomer1.Age = 24
+
+    fmt.Println(loyalCustomer1) // {Jacob SCBD 24}
+    fmt.Println(localCustomer1.Name) // Jacob
+  }
+  ```
+- Earlier, we have already created data using a _struct_, but actually, there are various methods for creating data from a _struct_, one of them is struct literals.
+  ```go
+  type Customer struct {
+    Name, Address string
+    Age           int
+  }
+
+  func main() {
+    joko := Customer{
+      Name: "Joko",
+      Address: "Indonesia",
+      Age: 30,
+    }
+    fm.Println(joko) // {Joko Indonesia 30}
+
+    budi := Customer{"Budi", "Indonesia", 30}
+    fmt.Println(budi) // {Budi Indonesia 30}
+  }
+  ```
+- A _struct_ is a data, similar to other data types, it can be used as a parameter for functions.
+- _Structs_ can have methods, just like how functions can be associated with a _struct_.
+- A method is essentially a function.
+  ```go
+  type Customer struct {
+    Name, Address string
+    Age   int
+  }
+
+  func (customer Customer) sayHello(name string) {
+    fmt.Println("Hello", name, "my name is", customer.Name)
+  }
+
+  func main() {
+    rully := Customer{Name: "Rully"}
+    rully.sayHello("Radit") // Hello Radit my name is Rully
+  }
+  ```
