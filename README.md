@@ -1926,3 +1926,42 @@ func main() {
     fmt.Println(address2) // City is also Bandung 
   }
   ```
+
+## Asterisk Operator *
+- When we modify a variable through a pointer, only that specific variable is affected.
+- Other variables referencing the same data will remain unchanged.
+  ```go
+  type Address struct {
+    City, Province, Country string
+  }
+
+  func main() {
+    address1 := Address{"Subang", "Jawa Barat", "Indonesia"}
+    address2 := &address1
+
+    address2.City = "Bandung"
+
+    address2 = &Address{"Jakarta", "DKI Jakarta", "Indonesia"} // address2 is a pointer to address1, so we need to put '&'
+
+    fmt.Println(address1) // {Bandung Jawa Barat Indonesia}
+    fmt.Println(address2) // {Jakarta DKI Jakarta Indonesia}
+  }
+  ```
+- If we want to update all variables referencing that data, we can use the _*_ operator.
+  ```go
+  type Address struct {
+    City, Province, Country string
+  }
+  
+  func main() {
+    address1 := Address{"Subang", "Jawa Barat", "Indonesia"}
+    address2 := &address1
+
+    address2.City = "Bandung"
+
+    *address2 = Address{"Jakarta", "DKI Jakarta", "Indonesia"}
+
+    fmt.Println(address1) // {Jakarta DKI Jakarta Indonesia}
+    fmt.Println(address2) // {Jakarta DKI Jakarta Indonesia}
+  }
+  ```
