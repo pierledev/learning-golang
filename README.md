@@ -1529,3 +1529,111 @@ func main() {
     fmt.Println(counter) // 2
   }
   ```
+
+## Defer, Panic, and Recover
+- This concept is somewhat akin to a try-catch structure in other programming languages.
+
+### Defer
+- A _defer_ function is a function that can be scheduled to be executed after another function has finished executing. 
+- The _defer_ function will always be executed even if an error occurs in the executed function.
+- This is a useful pattern for tasks like cleanup operations or logging that you want to ensure happen even if an error occurs or in a specific order.
+  ```go
+  func logging() {
+    fmt.Println("Finished calling function")
+  }
+
+  func runApplication() {
+    defer logging() // It will be called after all the block code below run.  It schedules the logging() function to be executed after the runApplication() function finishes. 
+    fmt.Println("Run application")
+    // Any other code in the runApplication function would be executed before the deferred function.
+
+    /*
+      Run application
+      Finished calling function
+    */
+  }
+
+  func main() {
+    runApplication()
+  }
+  ```
+
+### Panic
+- The _panic_ function is used to abruptly stop a program.
+- The _panic_ function is typically invoked when a panic occurs during the execution of a program.
+- When the _panic_ function is called, the program is halted, but any _deferred_ function will still be executed.
+  ```go
+  func endApp() {
+    fmt.Println("End App")
+  }
+
+  func runApp(error bool) {
+    defer endApp()
+
+    if error {
+      panic("Error")
+    }
+
+    endApp() // If this regular function/a defer function is placed below the error-checking block and an error occurs, the code will not be triggered.
+  }
+
+  func main() {
+    runApp(true)
+
+    /*
+      End App
+      panic: Error
+    */
+  }
+  ```
+
+### Recover
+- _Recover_ is a function used to capture data from a _panic_.
+- Through the _recover_ process, a _panic_ is halted, allowing the program to continue running.
+  ```go
+  func endApp() {
+    fmt.Println("End App")
+  }
+
+  // Incorrect recover program code
+  func runApp(error bool) {
+    defer endApp()
+
+    if(error) {
+      panic("ERROR")
+    }
+
+    // The following codes won't be executed once the program run and the panic() function is executed
+    message := recover()
+    fmt.Println("Error happened", message)
+  }
+  ```
+  ```go
+  // Correct recover program code
+  // Place the recover function and get the message from the panic() function inside the defer function because even if the program encounters an error, the defer function will still be executed
+  func endApp() {
+    fmt.Println("End App")
+    message := recover()
+    ft.Println("Error happened", message)
+  }
+
+  func runApp(error bool) {
+    defer endApp()
+
+    if(error) {
+      panic("ERROR")
+    }
+  }
+
+  func main() {
+    runApp(true)
+    fmt.Println("Printed!")
+
+    /*
+      Output:
+      End app
+      Error happened ERROR
+      Printed!
+    */
+  }
+  ```
