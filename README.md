@@ -2184,3 +2184,132 @@ func main() {
     // allowing the 'init' function to be executed without complaints
   }
   ```
+
+## Error Interface
+- Earlier, we already learned about _panic_, _recover_, and _defer_  for scenarios where an error needs to halt the application.
+- However, if we just want to signal an error without stopping the application, we can use the error feature.
+- Go has an interface named _error_ that serves as the standard interface for creating errors. The interface is defined as follows:
+  ```go
+  // The error built-in interface type is the conventiona interface for representing an error condition, with the nil value representing no error
+  type error interface {
+    Error() string
+  }
+  ```
+- Creating an error in Go doesn't require manual effort. Go provides a library in the _errors_ package that makes it easy to create error helpers.
+  ```go
+  import (
+    "errors"
+    "fmt"
+  )
+
+  func Divider(nilai int, pembagi int) (int, error) {
+    if nilai == 0 {
+      return 0, errors.New("Pembagian dengan 0")
+    } else {
+      return nilai / pembagi, nil
+    }
+  }
+
+  func main() {
+    hasil, err := Divider(100, 0)
+    if err == nil {
+      fmt.Println("Hasil", hasil)
+    } else {
+      fmt.Println("Error", err.Error())
+    }
+
+    // output:Error Pembagian dengan 0
+  }
+  ```
+- We can create custom errors in Go by implementing the _error_ interface. Since the _error_ interface has only one method, _Error() string_, we can define a struct that satisfies this interface by implementing the _Error()_ method.
+  ```go
+  // Defining a custom error type for validation errors
+  type validationError struct {
+    Message string
+  }
+
+  // Implementing the Error() method for the validationError type
+  func (v *validationError) Error() string {
+    return v.Message
+  }
+
+  // Defining a custom error type for not found errors
+  type notFoundError struct {
+    Message string
+  }
+
+  // Implementing the Error() method for the notFoundError type
+  func (v *notFoundError) Error() string {
+    return v.Message
+  }
+
+  // Using the custom error types in the SaveData function
+  func SaveData(id string, data any) error {
+    if id == "" {
+      // Returning a validation error when ID is empty
+      return &validationError{Message: "validation error"} // because it is an interface, so we return it as a pointer
+    }
+
+    if id != "eko" {
+      // Returning a not found error when ID is not "eko"
+      return &notFoundError{Message: "data not found"}
+    }
+    
+    // Other operations...
+
+    // Returning nil when there is no error
+    return nil
+  }
+
+  func main() {
+    // Checking the kind of error returned by SaveData
+    err := SaveData("", nil)
+
+    // If else
+    if err != nil {
+      if validationErr, ok := err.(*validationError); ok {
+        fmt.Println("validation error:", validationErr.Message)
+      } else if notFoundErr, ok := err.(*notFoundError); ok {
+        fmt.Println("not found error:", notFoundErr.Message)
+      } else {
+        fmt.Println("unknown error:", err.Error())
+      }
+    } else {
+      fmt.Println("success")
+    }
+
+    // The same functionality code with switch
+    switch finalError := err.(type) {
+      case *validationError:
+        fmt.Println("validation error:", finalError.Error())
+      case *notFoundError:
+        fmt.Println("not found error:", finalError.Error())
+      default:
+        fmt.Println("unknown error", finalError.Error())
+    }
+  }
+  ```
+  A little breakdown from the codes above:
+  - **Pointer receiver**. In the method receivers (e.g., (v *validationError) and (v *notFoundError)), the asterisk indicates that the receiver is a pointer. This means these methods are associated with instances of the respective types by reference (i.e., modifying the object directly).
+    ```go
+    func (v *validationError) Error() string {
+      return v.Message
+    }
+
+    func (v *notFoundError) Error() string {
+      return v.Message
+    }
+    ```
+  - **Creating a pointer**. When returning errors from the SaveData function, the & symbol is used to create a pointer to an instance of validationError or notFoundError. The asterisk is then used in the return type to indicate that the function returns a pointer to an error.
+    ```go
+    return &validationError{Message: "validation error"}
+    return &notFoundError{Message: "data not found"}
+    ```
+  - **Type assertion**.In the main function, when checking the type of the returned error, the asterisk is used in the type assertion (err.(*validationError)) to assert that err is of type *validationError. It's a way of converting the interface type to the specific custom error type.
+    ```go
+    if validationErr, ok := err.(*validationError); ok {
+      // ...
+    } else if notFoundErr, ok := err.(*notFoundError); ok {
+      // ...
+    }
+    ```

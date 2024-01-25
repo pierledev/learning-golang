@@ -325,4 +325,51 @@ func main() {
 
     fmt.Println("Loop", i)
   }
+
+  // Custom error
+  err := SaveData("", nil)
+
+    // If else
+    if err != nil {
+      if validationErr, ok := err.(*validationError); ok {
+        fmt.Println("validation error:", validationErr.Message)
+      } else if notFoundErr, ok := err.(*notFoundError); ok {
+        fmt.Println("not found error:", notFoundErr.Message)
+      } else {
+        fmt.Println("unknown error:", err.Error())
+      }
+    } else {
+      fmt.Println("success")
+    }
+}
+
+type validationError struct {
+  Message string
+}
+
+func (v *validationError) Error() string {
+  return v.Message
+}
+
+type notFoundError struct {
+  Message string
+}
+
+func (v *notFoundError) Error() string {
+  return v.Message
+}
+
+// Using the custom error
+func SaveData(id string, data any) error {
+  if id == "" {
+    return &validationError{Message: "validation error"} // because it is an interface, so we return it as a pointer
+  }
+
+  if id != "eko" {
+    return &notFoundError{Message: "data not found"}
+  }
+  
+  // ...
+
+  return nil
 }
